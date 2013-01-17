@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 
 public class strategy {
-	private static final String ADDRESS_FILE_CSV = "D:\\Ioana\\EPFL\\Gog\\Project\\strategy\\data\\Google.csv";
-	private static final String ADDRESS_FILE_TXT = "D:\\Ioana\\EPFL\\Gog\\Project\\strategy\\data\\chfeur.txt";
+	private static final String ADDRESS_FILE_CSV = "D:\\Ioana\\EPFL\\Gag\\Project\\strategy\\data\\Google.csv";
+	private static final String ADDRESS_FILE_TXT = "D:\\Ioana\\EPFL\\Gag\\Project\\strategy\\data\\chfeur.txt";
 	private static float [] valuesCSV;
 	private static float [] valuesTXT;
 	
