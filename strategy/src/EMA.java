@@ -1,17 +1,17 @@
 
 public class EMA {
 	private double k;
-	private float [] values;
+	private double [] values;
 	private int days;
 	
-	public EMA(int days, float [] values){
+	public EMA(int days, double [] values){
 		k = 2.0/(days+1);
 		this.values = values;
 		this.days = days;
 	}
 	
 	//Calculate current value of EMA: k*Price(t)+(1-k)*EMA(t-1)
-	public double calculateEMA(float val, double ema){
+	public double calculateEMA(double val, double ema){
 		return k*val+(1-k)*ema;
 	}
 	
