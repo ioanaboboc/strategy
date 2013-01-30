@@ -3,11 +3,13 @@ public class EMA {
 	private double k;
 	private double [] values;
 	private int days;
+	private int lengthSeries;
 	
-	public EMA(int days, double [] values){
+	public EMA(int days, double [] values, int length){
 		k = 2.0/(days+1);
 		this.values = values;
 		this.days = days;
+		lengthSeries = length;
 	}
 	
 	//Calculate current value of EMA: k*Price(t)+(1-k)*EMA(t-1)
@@ -18,8 +20,7 @@ public class EMA {
 	//Calculate the time series of EMA considering prices (closed or adjusted)
 	public double [] calculateTS_EMA(){
 		int i=0;
-		int length = values.length;
-		double [] ema = new double[length];
+		double [] ema = new double[lengthSeries];
 		ema[0] = values[0];
 
 		//first number of days, we calculate the moving average
@@ -28,7 +29,7 @@ public class EMA {
 		}
 
 		//next period, calculate EMA
-		for (i=days;i<length;++i){
+		for (i=days;i<lengthSeries;++i){
 			ema[i] = calculateEMA(values[i],ema[i-1]);
 		}
 		return ema;
