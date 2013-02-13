@@ -16,20 +16,10 @@ public class ZeroCrossover extends Strategy{
 	@Override
 	public int addTick(Double newTick) {
 		Double valueShort = null, valueLong = null;
-		historicalData.add(newTick);
-		
-		if(historicalData.size() == emaShort)
-			emaShortTS.previous = MathOp.avg(historicalData);
-		else if(historicalData.size() > emaShort)
-			valueShort = emaShortTS.calculateEMA(newTick);
-		
-		
-		if(historicalData.size() == emaLong)
-			emaLongTS.previous = MathOp.avg(historicalData);
-		else if (historicalData.size() > emaLong){
-			valueLong = emaLongTS.calculateEMA(newTick);
+		valueShort = emaShortTS.iterate(newTick);
+		valueLong = emaLongTS.iterate(newTick);
+		if(valueShort != null && valueLong != null)
 			return MathOp.sign(valueShort - valueLong);
-		}	
 		return 0;
 	}
 

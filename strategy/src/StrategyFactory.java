@@ -22,7 +22,7 @@ public class StrategyFactory {
 		int[] signal = new int[sizeValues];
 		for(int i=0; i<sizeValues-1; ++i){
 			signal[i] = strategy.addTick(valuesCSV.get(i));
-			profit += signal[i]*valuesCSV.get(i+1)/valuesCSV.get(i);
+			profit += signal[i]*Math.log(valuesCSV.get(i+1)/valuesCSV.get(i));
 		}
 		System.out.println("Cumulative return is " + profit);
 	}
