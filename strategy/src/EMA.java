@@ -15,14 +15,14 @@ public class EMA {
 	//Calculate current value of EMA: k*Price(t)+(1-k)*EMA(t-1)
 	public Double iterate(Double val){
 		if(in_days<days){
-			++in_days;
-			return null;
-		}
-		else if(in_days==days){
-			previous=(previous*in_days+val)/(++in_days);
+			if(previous == null)
+				previous=(val)/(++in_days);
+			else
+				previous=(previous*in_days+val)/(++in_days);
 			return previous;
 		}
-		previous = new Double (k*val+(1-k)*previous);
+		else
+			previous = new Double (k*val+(1-k)*previous);
 		return previous;
 	}
 }
