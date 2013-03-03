@@ -9,6 +9,8 @@ public class StrategyFactory {
 			return new ZeroCrossover(params);
 		else if(sID.equals("MACDv2"))
 			return new MACDv2(params);
+		else if(sID.equals("AvoidFalseSignals"))
+			return new AvoidFalseSignals(params);
 		throw new Exception("No strategy found");
 	}
 
