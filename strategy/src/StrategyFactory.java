@@ -24,6 +24,7 @@ public class StrategyFactory {
 		else
 			throw new Exception("No good type for file");
 		String [] params = new String[argv.length-3];
+		String [] auxParams = new String[argv.length-3];
 		for(int i=3;i<argv.length;++i){
 			params[i-3] = argv[i];
 		}
@@ -35,5 +36,34 @@ public class StrategyFactory {
 			profit += signal[i]*Math.log(values.get(i+1)/values.get(i));
 		}
 		System.out.println("Cumulative return is " + profit);
+		
+		//Find best combination of parameters
+		int[] auxParam = new int[params.length];
+		int[] findParam = new int[params.length];
+		for(int i=0;i<params.length;++i)
+			auxParam[i] = Integer.parseInt(params[i]);
+		for(int j=0;j<100;++j){
+			for(int i=0;i<params.length;++i){
+				findParam[i] = (int) (auxParam[i]+(int)(Math.random()*10)*Math.pow((-1),(int)(Math.random()*10)));
+				if(findParam[i]==0)
+					findParam[i]=1;
+				auxParams[i] = String.valueOf(findParam[i]);
+			}
+			strategy = createStrategy(argv[2], auxParams);
+			double newProfit = 0;
+			for(int k=0; k<sizeValues-1; ++k){
+				signal[k] = strategy.addTick(values.get(k));
+				newProfit += signal[k]*Math.log(values.get(k+1)/values.get(k));
+			}
+			if(newProfit>profit){
+				profit = newProfit;
+				for(int i=0;i<params.length;++i)
+					params[i] = auxParams[i];
+			}
+		}
+		System.out.print("Best parameters combination is ");
+		for(int i=0;i<params.length;++i)
+			System.out.print(params[i]+" ");
+		System.out.println("\n" + "Cumulative return is " + profit);
 	}
 }
